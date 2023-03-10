@@ -7,12 +7,36 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+
     @Autowired
     UserDao userDao;
 
 
-    public boolean isExist(String username) {
+    public User getUsernameAndPassword(String username, String password) {
+        return userDao.getByUsernameAndPassword(username, password);
+    }
+
+    public void addOrUpdate(User user) {
+        userDao.save(user);
+    }
+
+    public boolean isUsernameExist(String username) {
         User user = getByName(username);
+        return null != user;
+    }
+
+    public boolean isIdcardExist(String Idcard) {
+        User user = getByIdcard(Idcard);
+        return null != user;
+    }
+
+    public boolean isEmailExist(String email) {
+        User user = getByemail(email);
+        return null != user;
+    }
+
+    public boolean isPhoneExist(String phone) {
+        User user = getByphone(phone);
         return null != user;
     }
 
@@ -20,13 +44,15 @@ public class UserService {
         return userDao.findByUsername(username);
     }
 
-    public User get(String username, String password) {
-        return userDao.getByUsernameAndPassword(username, password);
+    public User getByIdcard(String Idcard) {
+        return userDao.findByIdcard(Idcard);
     }
 
-    public void add(User user) {
-        userDao.save(user);
+    public User getByemail(String email) {
+        return userDao.findByEmail(email);
     }
 
-
+    public User getByphone(String phone) {
+        return userDao.findByPhone(phone);
+    }
 }

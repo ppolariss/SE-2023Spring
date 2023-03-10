@@ -1,7 +1,6 @@
 package com.fk.demo.result;
 
 public class Result {
-
     //响应码
     private int code;
 
